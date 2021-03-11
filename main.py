@@ -21,6 +21,88 @@ def preprocess(data):
     '''
     MM = data.copy()
     MM = MM.sort_values(['country','year'])
+    start_df = MM[['startday', 'startmonth', 'startyear']].copy()
+    start_df.columns = ["day", "month", "year"]
+    start_df = pd.to_datetime(start_df)
+    end_df = MM[['endday', 'endmonth', 'endyear']].copy()
+    end_df.columns = ["day", "month", "year"]
+    end_df = pd.to_datetime(end_df)
+    endIdx = ~end_df.isnull()
+    startIdx = ~start_df.isnull()
+    validIdx = endIdx & startIdx
+    MM['start'] = start_df
+    MM['end'] = end_df
+
+    MM['protest_time'] = MM.end - MM.start + pd.Timedelta(days=1)
+    reasons_dict = {'labor wage dispute':'labor',
+     'land farm issue':'land',
+     'police brutality': 'policebrutality',
+     'political behavior, process': 'political',
+     'price increases, tax policy': 'price',
+     'removal of politician':'removal',
+     'social restrictions':'social'}
+
+    reasons = {'labor','land','policebrutality','political','price','removal','social','other'}
+
+    MM = MM.replace(reasons_dict)
+    for resn in reasons:
+        MM['reasons_'+resn] = 0
+    responses = {'accomodation',
+     'arrests',
+     'beatings',
+     'crowd_dispersal',
+     'ignore',
+     'killings',
+     'shootings',
+     'other'}
+
+    MM = MM.replace({'crowd dispersal':'crowd_dispersal'})
+    for resp in responses:
+        MM['responses_'+resp] = 0
+
+    for i in MM.index:
+        otherFlag = 1
+        for fld in ['protesterdemand1','protesterdemand2', 'protesterdemand3', 'protesterdemand4']:
+            if pd.isnull(MM[fld][i]) or MM[fld][i]=='.':
+                pass
+            else:
+                otherFlag = 0
+                MM.loc[i,'reasons_'+MM[fld][i]] = 1
+        if otherFlag:
+            MM.loc[i,'reasons_other'] = MM['protest'][i]
+
+    for i in MM.index:
+        otherFlag = 1
+        for fld in ['stateresponse1', 'stateresponse2', 'stateresponse3', 'stateresponse4', 'stateresponse5', 'stateresponse6', 'stateresponse7']:
+            if pd.isnull(MM[fld][i]) or MM[fld][i]=='.':
+                pass
+            else:
+                otherFlag = 0
+                MM.loc[i,'responses_'+MM[fld][i]] = 1
+        if otherFlag:
+            MM.loc[i,'responses_other'] = MM['protest'][i]
+    MM['protesterviolence'] = MM['protesterviolence'].fillna(int(0)).astype(np.int64)
+    # # Or
+    # MM = MM[~MM['protesterviolence'].isnull()]
+
+    MM['protest_time'] = MM['protest_time'].dt.days.fillna(int(0)).astype(np.int64)
+    # # Or
+    # MM = MM[~MM['protest_time'].isnull()]
+    # MM['protest_time'] = MM['protest_time'].dt.days.astype(np.int64)
+
+    MM['violent_response'] = MM['responses_beatings'] | MM['responses_killings'] | MM['responses_shootings']
+    MM['success'] = MM['responses_accomodation'].copy()
+
+    MM['violence_both'] = MM['violent_response'] | MM['protesterviolence']
+    MM['violent_protest_time'] = MM['protesterviolence']*MM['protest_time']
+    MM = MM.drop(['id', 'ccode', 'region', 'protestnumber', 'start', 'end',
+           'startday', 'startmonth', 'startyear', 'endday', 'endmonth', 'endyear',
+           'location', 'participants_category',
+           'participants', 'protesteridentity', 'protesterdemand1',
+           'protesterdemand2', 'protesterdemand3', 'protesterdemand4',
+           'stateresponse1', 'stateresponse2', 'stateresponse3', 'stateresponse4',
+           'stateresponse5', 'stateresponse6', 'stateresponse7', 'sources', 'notes'], axis=1)
+    MM.to_csv('main_data.csv')
 
 def viol_percentage_line_plot(data):
     '''
