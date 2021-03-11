@@ -8,21 +8,11 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 
 
 ### Modules/Packages
-
+   ```sh
 1. numpy
 2. pandas 
 3. matplotlib
 4. seaborn
-5. pygal
-6. plotly
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
+5. pygal - pygal_maps_world
+7. plotly
    ```
