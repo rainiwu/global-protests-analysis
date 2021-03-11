@@ -436,22 +436,6 @@ def plot_heatmap(data):
 	plt.xticks(fontweight='roman')
 	plt.yticks(fontweight='roman')
 
-def make_wordcloud(original_data):
-	# feature creation
-	all_notes = [d['notes'] for i,d in original_data.iterrows() if isinstance(d['notes'],str)]
-	txt = ''.join(all_notes)
-
-	#create the wordcloud object	
-	wordcloud = WordCloud(stopwords = STOPWORDS,
-							collocations=True).generate(txt)
-
-	#plot the wordcloud object
-	plt.imshow(wordcloud, interpolation='bilInear')
-	plt.axis('off')
-	plt.show()
-
-
- 
 def plot_success_stats(data):
 	success_Idx = data['success']>0
 	violent_Idx = data['violence_both']>0
