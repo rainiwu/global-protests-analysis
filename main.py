@@ -291,17 +291,14 @@ def violance_response(data):
     df_NoNviolance = data[data.protesterviolence == 0]
     df_violance = data[data.protesterviolence == 1]
     non_viloance_sum = df_NoNviolance.sum()[['responses_accomodation',
-           'responses_arrests', 'responses_shootings',
-           'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
-           'responses_ignore']]
+             'responses_arrests', 'responses_beatings', 'responses_crowd_dispersal', 'responses_ignore', 
+             ,'responses_killings', 'responses_shootings']]
     viloance_sum = df_violance.sum()[['responses_accomodation',
-           'responses_arrests', 'responses_shootings',
-           'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
-           'responses_ignore']]    
+             'responses_arrests', 'responses_beatings', 'responses_crowd_dispersal', 'responses_ignore', 
+             ,'responses_killings', 'responses_shootings']]    
     list1 = ['responses_accomodation',
-           'responses_arrests', 'responses_shootings',
-           'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
-           'responses_ignore']    
+             'responses_arrests', 'responses_beatings', 'responses_crowd_dispersal', 'responses_ignore', 
+             ,'responses_killings', 'responses_shootings']  
     list_non_violance = []
     for key in list1:
         list_non_violance.append(non_viloance_sum[key])
