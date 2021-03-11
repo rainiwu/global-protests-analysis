@@ -6,4 +6,5 @@ We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It 
 
 Mass Mobilization Protest Data Link https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL
 
-Mass Mobilization Protest[Dataset Link]("https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL")
+Mass Mobilization Protest
+[Dataset Link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL)
