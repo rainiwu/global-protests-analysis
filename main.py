@@ -190,7 +190,7 @@ def kenya_bar_plot(data):
     values = df_reasons['Total Protests']
     clrs = ['gray' if (x < max(values)) else '#E36C55' for x in values]    
 
-    mybar = plt.bar(df_reasons['Reason'], df_reasons['Total Protests'])
+    mybar = plt.bar(df_reasons.index, df_reasons['Total Protests'])
     for bar in mybar:
         bar.set_color("grey")
     mybar[0].set_color('#e36c55')
