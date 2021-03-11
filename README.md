@@ -15,4 +15,12 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 4. seaborn
 5. pygal - pygal_maps_world
 7. plotly
+8. cairo - cairosvg
+   ```
+### How to run the code
+   ```sh
+1. Install python V3
+2. Install required modules/packages specified in the Modules/Packages section
+3. Run the main file (main.py)
+4. Run the Jupyter Notebooks (visualizations.ipynb )
    ```
