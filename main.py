@@ -210,8 +210,7 @@ def duration_and_violence(main_data):
                               'responses_killings', 'responses_beatings', 'responses_shootings',
                               'responses_arrests', 'responses_ignore', 'responses_accomodation',
                               'responses_other', 'violent_response', 'success'], axis=1)    
-    violence = violence.sort_values(['protest_time']).drop(['Unnamed: 0', 'ccode',
-                                                            'country', 'year',
+    violence = violence.sort_values(['protest_time']).drop(['country', 'year',
                                                             'protest', 'protesterviolence', 'violent_protest_time'], axis=1)    
     violence0 = violence.copy()
     bins1 = [-1, 0, 10, 950]
