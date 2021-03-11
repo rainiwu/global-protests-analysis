@@ -54,3 +54,16 @@ def viol_percentage_line_plot(data):
     plt.ylabel('Percentage', size = 14)
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
     plt.grid(False)
+
+def kenya_line_plot(data):
+    '''
+    Processes the data and generates a line plot of the number of protests in Kenya from 1990 to 2020.
+    '''
+    df = data
+    df_kenya = df[df['country'] == 'Kenya']
+    df_kenya_yrs = df_kenya.groupby('year').sum()
+    # Plot of number of protests over the years for Kenya
+    kenya_line_plt = sns.lineplot(x = 'year', y = 'protest', data = df_kenya_yrs)
+    plt.title('Number of Protests in Kenya from 1990-2020', size = 16)
+    plt.ylabel('protest', size = 14)
+    plt.xlabel('year', size = 14)
