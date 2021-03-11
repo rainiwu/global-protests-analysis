@@ -302,7 +302,8 @@ def violance_response(data):
     list_non_violance = []
     for key in list1:
         list_non_violance.append(non_viloance_sum[key])
-    # print(list_non_violance)    list_violance = []
+    # print(list_non_violance)    
+    list_violance = []
     for key in list1:
         list_violance.append(viloance_sum[key])
     # print(list_violance)    labels = 'Accomodation', 'Arrests', 'Beatings', 'Crowd Dispersal', 'Ignore', 'Killings', 'Shooting'
