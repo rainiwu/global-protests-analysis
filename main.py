@@ -152,6 +152,7 @@ def kenya_line_plot(data):
     df_kenya = df[df['country'] == 'Kenya']
     df_kenya_yrs = df_kenya.groupby('year').sum()
     # Plot of number of protests over the years for Kenya
+    plt.figure(figsize=(6,4), dpi=190)
     kenya_line_plt = sns.lineplot(x = 'year', y = 'protest', data = df_kenya_yrs)
     plt.title('Number of Protests in Kenya from 1990-2020', size = 16)
     plt.ylabel('protest', size = 14)
@@ -188,10 +189,13 @@ def kenya_bar_plot(data):
     fig, ax = plt.subplots(figsize = fig_dims)    # Plotting
     values = df_reasons['Total Protests']
     clrs = ['gray' if (x < max(values)) else '#E36C55' for x in values]    
-    violence_plot = sns.barplot(x = df_reasons.index, y = 'Total Protests', data = df_reasons, ax = ax, palette = clrs)    
-    for p in violence_plot.patches:
-        height = int(p.get_height())
-        ax.annotate('{}'.format(height), xy = (p.get_x() + p.get_width() / 2, height), xytext = (0, 2), textcoords = 'offset points', ha = 'center', va = 'bottom')    
+
+    mybar = plt.bar(df_reasons['Reason'], df_reasons['Total Protests'])
+    for bar in mybar:
+        bar.set_color("grey")
+    mybar[0].set_color('#e36c55')
+    mybar[4].set_color('#e36c55')
+
     plt.xlabel('Reason', size = 14)
     plt.ylabel('Occurences', size = 14)
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
