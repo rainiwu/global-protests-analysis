@@ -247,16 +247,17 @@ def duration_and_violence(main_data):
     one_day = one_day.append(row, ignore_index=True)    
 
     # pie chart_within one day
+     def my_autopct(pct):
+        return ('%2.1f%%' %pct) if pct > 0 else ""
     labels = one_day['violence']
     percentages = one_day['total_count']
     sns.set_palette("coolwarm")
     plt.figure(figsize=(6,4), dpi=190)
     col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
-    plt.pie(percentages, labels=labels, autopct='%2.1f%%', shadow=True, colors=col)
+    plt.pie(percentages, labels=labels, autopct=my_autopct, shadow=True, colors=col)
     plt.axis('equal')
 
     plt.title('Within 1 day')
-
 
 
     # 1 day to 10 days
