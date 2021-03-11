@@ -311,3 +311,30 @@ def violance_response(data):
     plt.pie(list_non_violance, labels=labels, autopct='%1.0f%%', shadow=True, colors=col)
     plt.axis('equal')
     plt.title('State Responses for Non-Violent Protests')
+
+def line_percent_violence_day(data):
+    '''
+    Line chart of percent violence versus duration 
+    '''
+    tmp = dict()
+    tmp1 = []
+    tmp2 = []
+    for x in range(1,8):
+        Idx = data['protest_time']==x
+        v_Idx = data['violence_both']>0
+        
+        if(sum(Idx)==0):
+            tmp[x]=0
+        else:
+            tmp[(x,x+10)]=sum(v_Idx & Idx)/sum(v_Idx)*100
+            tmp1.append(sum(v_Idx & Idx)/sum(v_Idx)*100)
+            tmp2.append(x)
+
+    plt.figure(figsize=(6,4),dpi=190)
+
+    plt.plot(tmp2, tmp1)
+    plt.xlabel('Number of Days')
+    plt.ylabel('Percentage of Violence')
+    plt.title('')
+    plt.grid(False)
+
