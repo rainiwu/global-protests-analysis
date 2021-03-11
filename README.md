@@ -6,14 +6,14 @@ ECE143 Group 16 Final Project
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
-    <li="#about-the-project">Summary</a>
+    <li="#Summary">Summary</a>
 
   </ol>
 </details>
 
 
 
-<!-- ABOUT THE PROJECT -->
+<!-- Summary -->
 
 
 
