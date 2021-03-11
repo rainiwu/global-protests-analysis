@@ -199,6 +199,7 @@ def kenya_bar_plot(data):
     plt.xlabel('Reason', size = 14)
     plt.ylabel('Occurences', size = 14)
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
+    plt.grid(False)
 
 def duration_and_violence(main_data):    
     '''
