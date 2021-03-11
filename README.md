@@ -7,24 +7,22 @@ ECE143 Group 16 Final Project
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li="#Summary">Summary</a>
-
+    <li="#Modules_Packages">Modules/Packages</a>
+    <li="#run_code">How to Run the Code</a>
+    <li="#File_Structure">File Structure</a>
   </ol>
 </details>
-
-
-
-<!-- Summary -->
-
-
 
 
 We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It is collected from 162 countries in the time period (1990 - 2020). It contains information about each protest, including protester demands and state responses. 
 
 Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL)
 
+<!-- Summary -->
 ### Summary
 We are analyzing global protests in order to reach our goal of reducing police brutality and help protesters achieve their needs. Our objective of this project is perform some analysis of protests around the world which may bring new insights like: reasons for protests, causes of violence, success factors, global factors, prediction of success
 
+<!-- Modules/Packages -->
 ### Modules/Packages
 1. numpy
 2. pandas 
@@ -33,13 +31,15 @@ We are analyzing global protests in order to reach our goal of reducing police b
 5. pygal - pygal_maps_world
 7. plotly
 8. cairo - cairosvg
-   
-### How to run the code
+  
+<!-- How to Run the Code -->
+### How to Run the Code
 1. Install python V3
 2. Install required modules/packages specified in the Modules/Packages section
 3. Run the main file (main.py)
 4. Run the Jupyter Notebooks (visualizations.ipynb)
 
+<!-- File Structure -->
 ### File Structure 
 1. src code
    ```sh
