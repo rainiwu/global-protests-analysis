@@ -7,10 +7,14 @@ We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It 
 Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL)
 
 
-### Installation
+### Modules/Packages
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. numpy
+2. pandas 
+3. matplotlib
+4. seaborn
+5. pygal
+6. plotly
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
