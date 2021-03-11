@@ -196,8 +196,9 @@ def kenya_bar_plot(data):
     plt.ylabel('Occurences', size = 14)
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
 
-def duration_and_violence(main_data):    # process the input file
-    MM = pd.read_csv('main_data.csv')
+def duration_and_violence(main_data):    
+    # process the input file
+    MM = main_data
     violence = MM.sort_values(['country', 'year'])
     violence = violence.sort_values(['protest_time'])
     violence = violence.drop(['reasons_political', 'reasons_labor', 'reasons_price',
