@@ -213,7 +213,13 @@ def duration_and_violence(main_data):
     violence = violence.sort_values(['protest_time']).drop(['Unnamed: 0', 'ccode',
                                                             'country', 'year',
                                                             'protest', 'protesterviolence', 'violent_protest_time'], axis=1)    
-    violence0 = violence.copy()    
+    violence0 = violence.copy()
+    bins1 = [-1, 0, 10, 950]
+    index = ['End within 1 day', '1 days to 10 days', 'More than 10 days']
+    violence0.insert(0, "protest_time_interval", pd.cut(violence0['protest_time'], bins=bins1, labels=index))
+    violence0 = violence0.dropna(subset=['protest_time_interval'])
+    violence0['violence'] = np.where(violence0['violence_both'] == 1, 'Violent', 'Nonviolent')
+    violence0['count'] = 1
 
     # More than 10 days
     ten_days_more = violence0[violence0.protest_time_interval == 'More than 10 days']
