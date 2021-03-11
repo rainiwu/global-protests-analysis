@@ -54,3 +54,7 @@ We are analyzing global protests in order to reach our goal of reducing police b
    * Original Data - mmALL_073120_csv.csv
    * Cleaned Data(processed) - main_data.csv
    ```
+2. Presentation 
+   ```sh
+   * group16 presentation.pdf
+   ```
