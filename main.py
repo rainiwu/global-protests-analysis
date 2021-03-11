@@ -344,3 +344,65 @@ def line_percent_violence_day(data):
     plt.title('')
     plt.grid(False)
 
+def percent_per_reason_bar(data):
+    '''
+    Bar graph of percent success per reason 
+    '''
+    list_reasons = ['reasons_social', 'reasons_policebrutality','reasons_land', 'reasons_political', 'reasons_labor','reasons_price', 'reasons_removal']
+    s_Idx = data['success']>0
+    labels = ['social reforms', 'police brutality', 'property', 'law & politics', 'labor rights','inflation', 'anti-authoritarian']
+    s_dist = []
+    for reason in list_reasons:
+        Idx = data[reason]>0
+        s_dist.append(sum(Idx&s_Idx)/sum(Idx)*100)   
+    fig, ax = plt.subplots(figsize=(6,4), dpi=190)
+
+    y_pos = np.arange(len(labels))
+    y_pos = np.linspace(0, 2.5, len(labels))
+
+    mybars = ax.barh(y_pos, s_dist, align='center', height=0.3, color=(0.2, 0.4, 0.6, 0.6))
+    for bar in mybars:
+        bar.set_color('grey')
+    mybars[2].set_color('#E36C55')
+    mybars[3].set_color('#6a8bef')
+
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(labels)
+    ax.invert_yaxis()  # labels read top-to-bottom
+    ax.set_xlabel('Percent Successful')
+    ax.set_ylabel('Reasons')
+    ax.set_title("Percent of Successful Protests For Each Reason")
+    plt.xlim([0, 100])
+    plt.grid(False)
+
+def percent_per_duration_bar(data):
+    '''
+    Bar graph of percent success per duration
+    '''
+    list_d = [(0,1),(1,7),(7,30),(30,365),(365,7000)]
+    s_Idx = data['success']>0
+    labels = ['0-1 day','1-7 days','7-30 days','30-365 days','>1 year']
+    s_dist = []
+    for a,b in list_d:
+        Idx1 = data['protest_time']>a
+        Idx2 = data['protest_time']<=b
+        s_dist.append(sum(Idx1&Idx2&s_Idx)/sum(Idx1&Idx2)*100)
+    fig, ax = plt.subplots(figsize=(6,4),dpi=190)
+
+    y_pos = np.arange(len(labels))
+    y_pos = np.linspace(0, 1.5, len(labels))
+
+    col = plt.get_cmap('coolwarm')(np.linspace(0.3, 0.3, len(labels)+1))
+    mybars = ax.barh(y_pos, s_dist, align='center', height=0.3, color=col)
+
+        
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(labels)
+    ax.invert_yaxis()  # labels read top-to-bottom
+    ax.set_xlabel('Percent Successful')
+    ax.set_ylabel('Protest Duration')
+    ax.set_title("Percent of Successful Protests For Various Durations")
+
+    plt.grid(False)
+
+    plt.show()
