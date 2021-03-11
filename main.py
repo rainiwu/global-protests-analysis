@@ -374,7 +374,6 @@ def percent_per_reason_bar(data):
     ax.set_xlabel('Percent Successful')
     ax.set_ylabel('Reasons')
     ax.set_title("Percent of Successful Protests For Each Reason")
-    plt.xlim([0, 100])
     plt.grid(False)
 
 def percent_per_duration_bar(data):
