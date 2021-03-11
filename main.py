@@ -271,3 +271,37 @@ def duration_and_violence(main_data):
     ax.set_title("1 day to 10 days")    
     ax.legend(frameon=False, bbox_to_anchor=(1.5, 0.8))    
     fig.show()
+
+def violance_response(data):    
+    df_NoNviolance = data[data.protesterviolence == 0]
+    df_violance = data[data.protesterviolence == 1]
+    non_viloance_sum = df_NoNviolance.sum()[['responses_accomodation',
+           'responses_arrests', 'responses_shootings',
+           'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
+           'responses_ignore']]
+    viloance_sum = df_violance.sum()[['responses_accomodation',
+           'responses_arrests', 'responses_shootings',
+           'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
+           'responses_ignore']]    
+    list1 = ['responses_accomodation',
+           'responses_arrests', 'responses_shootings',
+           'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
+           'responses_ignore']    
+    list_non_violance = []
+    for key in list1:
+        list_non_violance.append(non_viloance_sum[key])
+    # print(list_non_violance)    list_violance = []
+    for key in list1:
+        list_violance.append(viloance_sum[key])
+    # print(list_violance)    labels = 'Accomodation', 'Arrests', 'Beatings', 'Crowd Dispersal', 'Ignore', 'Killings', 'Shooting'
+    col = ['lightblue','brown','lavenderblush', 'teal', 'darksalmon', 'blueviolet']    
+    plt.figure(figsize=(6,4), dpi=190)
+    col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
+    plt.pie(list_violance, labels=labels, autopct='%1.0f%%', shadow=True, colors=col)
+    plt.axis('equal')
+    plt.title('State Responses for Violent Protests')    
+    plt.figure(figsize=(6,4), dpi=190)
+    col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
+    plt.pie(list_non_violance, labels=labels, autopct='%1.0f%%', shadow=True, colors=col)
+    plt.axis('equal')
+    plt.title('State Responses for Non-Violent Protests')
