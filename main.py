@@ -306,7 +306,8 @@ def violance_response(data):
     list_violance = []
     for key in list1:
         list_violance.append(viloance_sum[key])
-    # print(list_violance)    labels = 'Accomodation', 'Arrests', 'Beatings', 'Crowd Dispersal', 'Ignore', 'Killings', 'Shooting'
+    # print(list_violance)    
+    labels = 'Accomodation', 'Arrests', 'Beatings', 'Crowd Dispersal', 'Ignore', 'Killings', 'Shooting'
     col = ['lightblue','brown','lavenderblush', 'teal', 'darksalmon', 'blueviolet']    
     plt.figure(figsize=(6,4), dpi=190)
     col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
