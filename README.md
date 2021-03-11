@@ -22,5 +22,15 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 1. Install python V3
 2. Install required modules/packages specified in the Modules/Packages section
 3. Run the main file (main.py)
-4. Run the Jupyter Notebooks (visualizations.ipynb )
+4. Run the Jupyter Notebooks (visualizations.ipynb)
+   ```
+### File Structure 
+   ```sh
+1. src code
+   ```
+   * npm
+   * main.py - 
+   * visualizations.ipynb - 
+   ```sh
+2. data
    ```
