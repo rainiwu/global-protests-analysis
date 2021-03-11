@@ -9,18 +9,20 @@ ECE143 Group 16 Final Project
     <li>
       <a href="#Summary">Summary</a>
     </li>
+    <li><a href="#Dataset">Dataset</a></li>
     <li><a href="#Modules-and-Packages">Modules and Packages</a></li>
     <li><a href="#How-to-Run-the-Code">How to Run the Code</a></li>
     <li><a href="#File-Structure">File Structure</a></li>
   </ol>
 </details>
 
-We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It is collected from 162 countries in the time period (1990 - 2020). It contains information about each protest, including protester demands and state responses. 
-
+### Dataset
 Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL)
 
 <!-- Summary -->
 ### Summary
+We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It is collected from 162 countries in the time period (1990 - 2020). It contains information about each protest, including protester demands and state responses. 
+
 We are analyzing global protests in order to reach our goal of reducing police brutality and help protesters achieve their needs. Our objective of this project is perform some analysis of protests around the world which may bring new insights like: reasons for protests, causes of violence, success factors, global factors, prediction of success
 
 <!-- Modules/Packages -->
