@@ -9,7 +9,7 @@ ECE143 Group 16 Final Project
     <li>
       <a href="#Summary">Summary</a>
     </li>
-    <li><a href="#Modules-Packages">Modules Packages</a></li>
+    <li><a href="#Modules-Packages">Modules and Packages</a></li>
     <li><a href="#How-to-Run-the-Code">How to Run the Code</a></li>
     <li><a href="#File-Structure">File Structure</a></li>
   </ol>
@@ -24,7 +24,7 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 We are analyzing global protests in order to reach our goal of reducing police brutality and help protesters achieve their needs. Our objective of this project is perform some analysis of protests around the world which may bring new insights like: reasons for protests, causes of violence, success factors, global factors, prediction of success
 
 <!-- Modules/Packages -->
-### Modules Packages
+### Modules and Packages
 1. numpy
 2. pandas 
 3. matplotlib
