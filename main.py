@@ -15,6 +15,7 @@ from pygal.maps.world import COUNTRIES
 # Set notebook mode to work in offline
 pyo.init_notebook_mode()
 
+'''Cleaning the data'''
 def preprocess(data):
     '''
     Clean the data
@@ -104,6 +105,7 @@ def preprocess(data):
            'stateresponse5', 'stateresponse6', 'stateresponse7', 'sources', 'notes'], axis=1)
     MM.to_csv('main_data.csv')
 
+'''Plot the percentage of Violent Protests For Each Protest Reason'''
 def viol_percentage_line_plot(data):
     '''
     Processes the input data and generates a line plot for the violence percentage of each reason.
@@ -144,6 +146,7 @@ def viol_percentage_line_plot(data):
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
     plt.grid(False)
 
+'''Plot the Number of Protests in Kenya from 1990-2020'''
 def kenya_line_plot(data):
     '''
     Processes the data and generates a line plot of the number of protests in Kenya from 1990 to 2020.
@@ -158,6 +161,7 @@ def kenya_line_plot(data):
     plt.ylabel('protest', size = 14)
     plt.xlabel('year', size = 14)
 
+'''Plot the Number of Protests in Kenya for each Reason in Kenya 2015'''
 def kenya_bar_plot(data):
     '''
     Processes the data and generates a bar plot for the number of protests for each reason in Kenya 2015.
@@ -201,6 +205,7 @@ def kenya_bar_plot(data):
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
     plt.grid(False)
 
+'''Plot Violence vs Duration'''
 def duration_and_violence(main_data):    
     '''
     Three pie charts related to violence and duration
@@ -247,17 +252,16 @@ def duration_and_violence(main_data):
     one_day = one_day.append(row, ignore_index=True)    
 
     # pie chart_within one day
-     def my_autopct(pct):
-        return ('%2.1f%%' %pct) if pct > 0 else ""
     labels = one_day['violence']
     percentages = one_day['total_count']
     sns.set_palette("coolwarm")
     plt.figure(figsize=(6,4), dpi=190)
     col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
-    plt.pie(percentages, labels=labels, autopct=my_autopct, shadow=True, colors=col)
+    plt.pie(percentages, labels=labels, autopct='%2.1f%%', shadow=True, colors=col)
     plt.axis('equal')
 
     plt.title('Within 1 day')
+
 
 
     # 1 day to 10 days
@@ -276,6 +280,7 @@ def duration_and_violence(main_data):
 
     plt.title('1 day to 10 days')
 
+'''Plot Response to Violent and Non-Violent protests'''
 def violance_response(data):    
     '''
     Two pie charts describing the response to violent and nonviolent events
@@ -312,6 +317,7 @@ def violance_response(data):
     plt.axis('equal')
     plt.title('State Responses for Non-Violent Protests')
 
+'''Plot violence percentage per day'''
 def line_percent_violence_day(data):
     '''
     Line chart of percent violence versus duration 
@@ -338,6 +344,7 @@ def line_percent_violence_day(data):
     plt.title('')
     plt.grid(False)
 
+'''Plot success per reason'''
 def percent_per_reason_bar(data):
     '''
     Bar graph of percent success per reason 
