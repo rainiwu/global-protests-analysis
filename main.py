@@ -230,19 +230,16 @@ def duration_and_violence(main_data):
     ten_days_more = ten_days_more.groupby(['violence']).size().reset_index(name='total_count')    
 
     # piechart for more than ten days
-    fig, ax = plt.subplots(figsize=(15, 10))
     labels = ten_days_more['violence']
     percentages = ten_days_more['total_count']
-    color = plt.cm.coolwarm([0.2, 0.68])
-    ax.pie(percentages, explode=[0.5, 0], labels=labels,
-           autopct='%.1f%%',
-           shadow=False, startangle=90, colors=color,
-           pctdistance=0.8, labeldistance=0.5, radius=10.5)
-    ax.axis('equal')
-    ax.set_title("More than 10 days")    
-    ax.legend(frameon=False, bbox_to_anchor=(1.5, 0.8))    
-    fig.show()
+    sns.set_palette("coolwarm")
+    plt.figure(figsize=(6,4), dpi=190)
+    col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
+    plt.pie(percentages, labels=labels, autopct='%2.1f%%', shadow=True, colors=col)
+    plt.axis('equal')
 
+    plt.title('More than 10 days')
+    
     # Within one day
     one_day = violence0[violence0.protest_time_interval == 'End within 1 day']
     one_day = one_day.groupby(['violence']).size().reset_index(name='total_count')
@@ -250,21 +247,17 @@ def duration_and_violence(main_data):
     one_day = one_day.append(row, ignore_index=True)    
 
     # pie chart_within one day
-    def my_autopct(pct):
-        return ('%.1f%%' % pct) if pct > 0 else ""    
-
-    fig, ax = plt.subplots(figsize=(15, 10))
     labels = one_day['violence']
     percentages = one_day['total_count']
-    color = plt.cm.coolwarm([0.2, 0.68])
-    ax.pie(percentages, explode=[0.5, 0], labels=labels,
-           autopct=my_autopct,
-           shadow=False, startangle=0, colors=color,
-           pctdistance=0, labeldistance=1.1, radius=10.5)
-    ax.axis('equal')
-    ax.set_title("Within 1 day")    
-    ax.legend(frameon=False, bbox_to_anchor=(1.5, 0.8))    
-    fig.show()
+    sns.set_palette("coolwarm")
+    plt.figure(figsize=(6,4), dpi=190)
+    col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
+    plt.pie(percentages, labels=labels, autopct='%2.1f%%', shadow=True, colors=col)
+    plt.axis('equal')
+
+    plt.title('Within 1 day')
+
+
 
     # 1 day to 10 days
     one_to_ten = violence0.copy()
@@ -272,18 +265,15 @@ def duration_and_violence(main_data):
     one_to_ten = one_to_ten[one_to_ten.protest_time_interval == '1 days to 10 days']    
 
     # pie chart for 1 day to 10 days
-    fig, ax = plt.subplots(figsize=(15, 10))
     labels = one_to_ten['violence']
     percentages = one_to_ten['total_count']
-    color = plt.cm.coolwarm([0.2, 0.68])
-    ax.pie(percentages, explode=[0.5, 0], labels=labels,
-           autopct='%.1f%%',
-           shadow=False, startangle=90, colors=color,
-           pctdistance=0.8, labeldistance=0.5, radius=10.5)
-    ax.axis('equal')
-    ax.set_title("1 day to 10 days")    
-    ax.legend(frameon=False, bbox_to_anchor=(1.5, 0.8))    
-    fig.show()
+    sns.set_palette("coolwarm")
+    plt.figure(figsize=(6,4), dpi=190)
+    col = plt.get_cmap('coolwarm')(np.linspace(.2, .9, len(labels)))
+    plt.pie(percentages, labels=labels, autopct='%2.1f%%', shadow=True, colors=col)
+    plt.axis('equal')
+
+    plt.title('1 day to 10 days')
 
 def violance_response(data):    
     '''
