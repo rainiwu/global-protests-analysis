@@ -27,10 +27,11 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 ### File Structure 
 1. src code
    ```sh
-   * main.py - 
-   * visualizations.ipynb - 
+   * main.py - main file contains all analysis of the project
+   * visualizations.ipynb - containls all visualizations to generate our graphs 
    ```
 2. data
    ```sh
-   
+   * Original Data - mmALL_073120_csv.csv
+   * Cleaned Data(processed) - main_data.csv
    ```
