@@ -25,12 +25,12 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 4. Run the Jupyter Notebooks (visualizations.ipynb)
    ```
 ### File Structure 
-   ```sh
 1. src code
-   ```
-   * npm
+   ```sh
    * main.py - 
    * visualizations.ipynb - 
-   ```sh
+   ```
 2. data
+   ```sh
+   
    ```
