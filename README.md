@@ -2,16 +2,31 @@
 
 ECE143 Group 16 Final Project
 
+
+
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
-    <li="#Summary">Summary</a>
-    <li="#Modules_Packages">Modules/Packages</a>
-    <li="#run_code">How to Run the Code</a>
-    <li="#File_Structure">File Structure</a>
+    <li>
+      <a href="#Summary">Summary</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    <li><a href="#Modules_Packages">Modules/Packages</a></li>
+    <li><a href="#roadmap">Modules/Packages</a></li>
+    <li><a href="#run_code">How to Run the Code</a></li>
+    <li><a href="#File_Structure">File Structure</a></li>
   </ol>
 </details>
+
+
+
+
 
 
 We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It is collected from 162 countries in the time period (1990 - 2020). It contains information about each protest, including protester demands and state responses. 
