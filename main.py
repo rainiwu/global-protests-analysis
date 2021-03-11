@@ -197,6 +197,9 @@ def kenya_bar_plot(data):
     plt.title('Percentage of Violent Protests For Each Reason', size = 16)
 
 def duration_and_violence(main_data):    
+    '''
+    Three pie charts related to violence and duration
+    '''
     # process the input file
     MM = main_data
     violence = MM.sort_values(['country', 'year'])
@@ -273,6 +276,9 @@ def duration_and_violence(main_data):
     fig.show()
 
 def violance_response(data):    
+    '''
+    Two pie charts describing the response to violent and nonviolent events
+    '''
     df_NoNviolance = data[data.protesterviolence == 0]
     df_violance = data[data.protesterviolence == 1]
     non_viloance_sum = df_NoNviolance.sum()[['responses_accomodation',
