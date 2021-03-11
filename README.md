@@ -7,12 +7,7 @@ We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It 
 Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL)
 
 ### Summary
-We are analyzing global protests in order to reach our goal of reducing police brutality and help protesters achieve their needs. Our objective of this project is perform some analysis of protests around the world which may bring new insights like:
-* Reasons for protests
-* Causes of violence
-* Success factors
-* Global factors
-* Prediction of success
+We are analyzing global protests in order to reach our goal of reducing police brutality and help protesters achieve their needs. Our objective of this project is perform some analysis of protests around the world which may bring new insights like: reasons for protests, causes of violence, success factors, global factors, prediction of success
 
 ### Modules/Packages
 1. numpy
