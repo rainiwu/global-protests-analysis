@@ -56,5 +56,5 @@ We are analyzing global protests in order to reach our goal of reducing police b
    ```
 2. Presentation 
    ```sh
-   * group16 presentation.pdf
+   * Group-16 Presentation.pdf
    ```
