@@ -6,9 +6,10 @@ We use the Mass Mobilization Protest Data, by David Clark and Patrick Regan. It 
 
 Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HTTWYL)
 
+### Summary
+We are analyzing global protests in order to reach our goal of reducing police brutality and help protesters achieve their needs. Our objective of this project is perform some analysis of protests around the world which may bring new insights like: reasons for protests, causes of violence, success factors, global factors, prediction of success
 
 ### Modules/Packages
-   ```sh
 1. numpy
 2. pandas 
 3. matplotlib
@@ -16,14 +17,13 @@ Mass Mobilization Protest [Dataset Link](https://dataverse.harvard.edu/dataset.x
 5. pygal - pygal_maps_world
 7. plotly
 8. cairo - cairosvg
-   ```
+   
 ### How to run the code
-   ```sh
 1. Install python V3
 2. Install required modules/packages specified in the Modules/Packages section
 3. Run the main file (main.py)
 4. Run the Jupyter Notebooks (visualizations.ipynb)
-   ```
+
 ### File Structure 
 1. src code
    ```sh
