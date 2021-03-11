@@ -12,10 +12,9 @@ ECE143 Group 16 Final Project
     <li>
       <a href="#getting-started">Getting Started</a>
     </li>
-    <li><a href="#Modules_Packages">Modules/Packages</a></li>
-    <li><a href="#roadmap">Modules/Packages</a></li>
-    <li><a href="#run_code">How to Run the Code</a></li>
-    <li><a href="#File_Structure">File Structure</a></li>
+    <li><a href="#Modules/Packages">Modules/Packages</a></li>
+    <li><a href="#How to Run the Code">How to Run the Code</a></li>
+    <li><a href="#File Structure">File Structure</a></li>
   </ol>
 </details>
 
