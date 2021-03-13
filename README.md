@@ -39,8 +39,7 @@ We are analyzing global protests in order to reach our goal of reducing police b
 ### How to Run the Code
 1. Install python V3
 2. Install required modules/packages specified in the Modules/Packages section
-3. Run the main file (main.py)
-4. Run the Jupyter Notebooks (visualizations.ipynb)
+3. Run the Jupyter Notebooks (visualizations.ipynb)
 
 <!-- File Structure -->
 ### File Structure 
