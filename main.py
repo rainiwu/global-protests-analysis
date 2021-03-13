@@ -20,6 +20,7 @@ def preprocess(data):
     '''
     Clean the data
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     MM = data.copy()
     MM = MM.sort_values(['country','year'])
     start_df = MM[['startday', 'startmonth', 'startyear']].copy()
@@ -110,6 +111,7 @@ def viol_percentage_line_plot(data):
     '''
     Processes the input data and generates a line plot for the violence percentage of each reason.
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     # Initializing dataframe
     df = data
     df = df[['protest', 'protesterviolence', 'reasons_labor', 'reasons_social', 'reasons_land', 'reasons_removal',
@@ -151,6 +153,7 @@ def kenya_line_plot(data):
     '''
     Processes the data and generates a line plot of the number of protests in Kenya from 1990 to 2020.
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     df = data
     df_kenya = df[df['country'] == 'Kenya']
     df_kenya_yrs = df_kenya.groupby('year').sum()
@@ -210,6 +213,7 @@ def duration_and_violence(main_data):
     '''
     Three pie charts related to violence and duration
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     # process the input file
     MM = main_data
     violence = MM.sort_values(['country', 'year'])
@@ -262,8 +266,6 @@ def duration_and_violence(main_data):
 
     plt.title('Within 1 day')
 
-
-
     # 1 day to 10 days
     one_to_ten = violence0.copy()
     one_to_ten = one_to_ten.groupby(['protest_time_interval', 'violence']).size().reset_index(name='total_count')
@@ -285,6 +287,7 @@ def violance_response(data):
     '''
     Two pie charts describing the response to violent and nonviolent events
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     df_NoNviolance = data[data.protesterviolence == 0]
     df_violance = data[data.protesterviolence == 1]
     non_viloance_sum = df_NoNviolance.sum()[['responses_accomodation',
@@ -322,6 +325,7 @@ def line_percent_violence_day(data):
     '''
     Line chart of percent violence versus duration 
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     tmp = dict()
     tmp1 = []
     tmp2 = []
@@ -349,6 +353,7 @@ def percent_per_reason_bar(data):
     '''
     Bar graph of percent success per reason 
     '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
     list_reasons = ['reasons_social', 'reasons_policebrutality','reasons_land', 'reasons_political', 'reasons_labor','reasons_price', 'reasons_removal']
     s_Idx = data['success']>0
     labels = ['social reforms', 'police brutality', 'property', 'law & politics', 'labor rights','inflation', 'anti-authoritarian']
@@ -409,185 +414,208 @@ def percent_per_duration_bar(data):
 
 
 def plot_heatmap(data):
-	# feature extraction
-	useful_data = data[['country','reasons_social', 'reasons_policebrutality',
-						'reasons_other', 'reasons_land', 'reasons_political', 'reasons_labor',
-						'reasons_price', 'reasons_removal', 'responses_accomodation',
-						'responses_arrests', 'responses_shootings', 'responses_other',
-						'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
-						'responses_ignore']].groupby(['country']).sum().reset_index()
+    '''
+    Plot a heatmap of the correlation between reasons and responses
+    '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
+    # feature extraction
+    useful_data = data[['country','reasons_social', 'reasons_policebrutality',
+                                            'reasons_other', 'reasons_land', 'reasons_political', 'reasons_labor',
+                                            'reasons_price', 'reasons_removal', 'responses_accomodation',
+                                            'responses_arrests', 'responses_shootings', 'responses_other',
+                                            'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
+                                            'responses_ignore']].groupby(['country']).sum().reset_index()
 
-	# find correlation
-	correlation = useful_data.corr()
+    # find correlation
+    correlation = useful_data.corr()
 
-	trimmed_correlation = correlation[['reasons_social', 'reasons_policebrutality','reasons_land', 'reasons_political', 'reasons_labor',
-										'reasons_price', 'reasons_removal']].loc[['responses_accomodation',
-										'responses_arrests', 'responses_shootings',
-										'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
-										'responses_ignore']]
-	# ploting the heatmap
-	plt.figure(figsize = (11,7))
-	cmp = sns.color_palette("coolwarm", as_cmap=True)
-	ax = sns.heatmap(trimmed_correlation.T, annot = True, cmap = cmp, cbar=True, xticklabels=['accomodation', 'detentions', 'shootings', 'crowd dispersal', 'assault', 'deaths','indifference'], yticklabels=['social reforms', 'police brutality', 'property', 'law & politics', 'labor rights','inflation', 'anti-authoritarian'])
+    trimmed_correlation = correlation[['reasons_social', 'reasons_policebrutality','reasons_land', 'reasons_political', 'reasons_labor',
+                                                                            'reasons_price', 'reasons_removal']].loc[['responses_accomodation',
+                                                                            'responses_arrests', 'responses_shootings',
+                                                                            'responses_crowd_dispersal', 'responses_beatings', 'responses_killings',
+                                                                            'responses_ignore']]
+    # ploting the heatmap
+    plt.figure(figsize = (11,7))
+    cmp = sns.color_palette("coolwarm", as_cmap=True)
+    ax = sns.heatmap(trimmed_correlation.T, annot = True, cmap = cmp, cbar=True, xticklabels=['accomodation', 'detentions', 'shootings', 'crowd dispersal', 'assault', 'deaths','indifference'], yticklabels=['social reforms', 'police brutality', 'property', 'law & politics', 'labor rights','inflation', 'anti-authoritarian'])
 
-	plt.ylabel('Reasons',fontsize='x-large')
-	plt.xlabel('Responses',fontsize='x-large')
+    plt.ylabel('Reasons',fontsize='x-large')
+    plt.xlabel('Responses',fontsize='x-large')
 
-	plt.xticks(fontweight='roman')
-	plt.yticks(fontweight='roman')
+    plt.xticks(fontweight='roman')
+    plt.yticks(fontweight='roman')
 
 def plot_success_stats(data):
-	success_Idx = data['success']>0
-	violent_Idx = data['violence_both']>0
+    '''
+    Plot of success rates violence/nonviolence circle
+    '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
+    success_Idx = data['success']>0
+    violent_Idx = data['violence_both']>0
 
-	violent_success = sum(violent_Idx & success_Idx)/sum(success_Idx)*100
+    violent_success = sum(violent_Idx & success_Idx)/sum(success_Idx)*100
 
-	sizes = [violent_success, 100-violent_success]
+    sizes = [violent_success, 100-violent_success]
 
-	labels = ['violent', 'non-violent']
-	color_palette = plt.get_cmap('coolwarm')(
-	        np.linspace(0.1, 0.9, len(labels)))
+    labels = ['violent', 'non-violent']
+    color_palette = plt.get_cmap('coolwarm')(
+            np.linspace(0.1, 0.9, len(labels)))
 
-	plt.figure(figsize=(12,7))
+    plt.figure(figsize=(12,7))
 
-	plt.pie(sizes, labels=labels, shadow=True, colors=color_palette, textprops={'fontsize': 'x-large'})
-	plt.axis('equal')
+    plt.pie(sizes, labels=labels, shadow=True, colors=color_palette, textprops={'fontsize': 'x-large'})
+    plt.axis('equal')
 
-	central_circle=plt.Circle( (0,0), 0.6, color='white')
-	p=plt.gcf()
-	p.gca().add_artist(central_circle)
-	plt.text(0, 0, 'Success', ha='center', fontsize='xx-large')
-	plt.show()
+    central_circle=plt.Circle( (0,0), 0.6, color='white')
+    p=plt.gcf()
+    p.gca().add_artist(central_circle)
+    plt.text(0, 0, 'Success', ha='center', fontsize='xx-large')
+    plt.show()
 
 def plot_ignored_stats(data):
-	ignored_Idx = data['responses_ignore']>0
-	violent_Idx = data['violence_both']>0
+    '''
+    Circle plot of ignore rate violent vs nonviolent
+    '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
+    ignored_Idx = data['responses_ignore']>0
+    violent_Idx = data['violence_both']>0
 
-	violent_ignored = sum(violent_Idx & ignored_Idx)/sum(ignored_Idx)*100
+    violent_ignored = sum(violent_Idx & ignored_Idx)/sum(ignored_Idx)*100
 
-	sizes = [violent_ignored, 100-violent_ignored]
+    sizes = [violent_ignored, 100-violent_ignored]
 
-	labels = ['violent', 'non-violent']
-	color_palette = plt.get_cmap('coolwarm')(
-	        np.linspace(0.1, 0.9, len(labels)))
+    labels = ['violent', 'non-violent']
+    color_palette = plt.get_cmap('coolwarm')(
+            np.linspace(0.1, 0.9, len(labels)))
 
-	plt.figure(figsize=(12,7))
+    plt.figure(figsize=(12,7))
 
-	plt.pie(sizes, labels=labels, shadow=True, colors=color_palette, textprops={'fontsize': 'x-large'})
-	plt.axis('equal')
+    plt.pie(sizes, labels=labels, shadow=True, colors=color_palette, textprops={'fontsize': 'x-large'})
+    plt.axis('equal')
 
-	central_circle=plt.Circle( (0,0), 0.6, color='white')
-	p=plt.gcf()
-	p.gca().add_artist(central_circle)
-	plt.text(0, 0, 'Ignorance', ha='center', fontsize='xx-large')
-	plt.show()
+    central_circle=plt.Circle( (0,0), 0.6, color='white')
+    p=plt.gcf()
+    p.gca().add_artist(central_circle)
+    plt.text(0, 0, 'Ignorance', ha='center', fontsize='xx-large')
+    plt.show()
 
 def plot_reasons(data):
+    '''
+    Plot of the reasons in the dataset
+    '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
 
-	summed_data = data.sum()
-	reasons_list = ['reasons_social','reasons_policebrutality','reasons_land','reasons_political','reasons_labor','reasons_price','reasons_removal']
-	score_reasons = [summed_data[reason] for reason in reasons_list]
-	score_reasons = [784, 1101, 602, 3750, 1511, 1214, 1689]
+    summed_data = data.sum()
+    reasons_list = ['reasons_social','reasons_policebrutality','reasons_land','reasons_political','reasons_labor','reasons_price','reasons_removal']
+    score_reasons = [summed_data[reason] for reason in reasons_list]
+    score_reasons = [784, 1101, 602, 3750, 1511, 1214, 1689]
 
-	category_names = ['social', 'police brutality', 'property', 'law & politics', 'labor rights', 'inflation', 'anti-authoritarian']
-	results = {"":score_reasons}
+    category_names = ['social', 'police brutality', 'property', 'law & politics', 'labor rights', 'inflation', 'anti-authoritarian']
+    results = {"":score_reasons}
 
-	labels = list(results.keys())
-	data = np.array(list(results.values()))
-	data_cum = data.cumsum(axis=1)
-	category_colors = plt.get_cmap('mako_r')(np.linspace(0.15, 0.85, data.shape[1]))
+    labels = list(results.keys())
+    data = np.array(list(results.values()))
+    data_cum = data.cumsum(axis=1)
+    category_colors = plt.get_cmap('mako_r')(np.linspace(0.15, 0.85, data.shape[1]))
 
-	fig, ax = plt.subplots(figsize=(35, 3))
-	ax.invert_yaxis()
-	ax.xaxis.set_visible(False)
-	ax.set_xlim(0, np.sum(data, axis=1).max())
+    fig, ax = plt.subplots(figsize=(35, 3))
+    ax.invert_yaxis()
+    ax.xaxis.set_visible(False)
+    ax.set_xlim(0, np.sum(data, axis=1).max())
 
-	for i, (colname, color) in enumerate(zip(category_names, category_colors)):
-		widths = data[:, i]
-		starts = data_cum[:, i] - widths
-		ax.barh(labels, widths, left=starts, height=0.5,label=colname, color=color)
-		xcenters = starts + widths / 2
+    for i, (colname, color) in enumerate(zip(category_names, category_colors)):
+        widths = data[:, i]
+        starts = data_cum[:, i] - widths
+        ax.barh(labels, widths, left=starts, height=0.5,label=colname, color=color)
+        xcenters = starts + widths / 2
 
-		r, g, b, _ = color
-		text_color = 'white'
-		for y, (x, c) in enumerate(zip(xcenters, widths)):
-			ax.text(x, y, category_names[i], ha='center', va='center',
-				color=text_color, fontsize=20, fontweight='bold', fontname='Gill Sans MT')
+        r, g, b, _ = color
+        text_color = 'white'
+        for y, (x, c) in enumerate(zip(xcenters, widths)):
+            ax.text(x, y, category_names[i], ha='center', va='center',
+                color=text_color, fontsize=20, fontweight='bold', fontname='Gill Sans MT')
 
-	ax.axis('off')
-	plt.show()
+    ax.axis('off')
+    plt.show()
 
 
 
 def plot_responses(data):
+    '''
+    Plot of responses in the dataset
+    '''
+    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
+    summed_data = data.sum()
+    responses_list = ['responses_arrests', 'responses_shootings', 'responses_crowd_dispersal', 'responses_beatings', 'responses_killings','responses_ignore', 'success']
+    score_responses = [summed_data[response] for response in responses_list]
+    score_responses = [2149, 1200, 3072, 900, 1000, 5285, 1027]
 
-	summed_data = data.sum()
-	responses_list = ['responses_arrests', 'responses_shootings', 'responses_crowd_dispersal', 'responses_beatings', 'responses_killings','responses_ignore', 'success']
-	score_responses = [summed_data[response] for response in responses_list]
-	score_responses = [2149, 1200, 3072, 900, 1000, 5285, 1027]
+    category_names = ['detentions', 'shootings', 'crowd dispersal', 'assault', 'deaths', 'indifference', 'success']
+    results = {"":score_responses}
 
-	category_names = ['detentions', 'shootings', 'crowd dispersal', 'assault', 'deaths', 'indifference', 'success']
-	results = {"":score_responses}
+    labels = list(results.keys())
+    data = np.array(list(results.values()))
+    data_cum = data.cumsum(axis=1)
+    category_colors = plt.get_cmap('flare')(np.linspace(0.15, 0.85, data.shape[1]))
 
-	labels = list(results.keys())
-	data = np.array(list(results.values()))
-	data_cum = data.cumsum(axis=1)
-	category_colors = plt.get_cmap('flare')(np.linspace(0.15, 0.85, data.shape[1]))
+    fig, ax = plt.subplots(figsize=(35, 3))
+    ax.invert_yaxis()
+    ax.xaxis.set_visible(False)
+    ax.set_xlim(0, np.sum(data, axis=1).max())
 
-	fig, ax = plt.subplots(figsize=(35, 3))
-	ax.invert_yaxis()
-	ax.xaxis.set_visible(False)
-	ax.set_xlim(0, np.sum(data, axis=1).max())
+    for i, (colname, color) in enumerate(zip(category_names, category_colors)):
+        widths = data[:, i]
+        starts = data_cum[:, i] - widths
+        ax.barh(labels, widths, left=starts, height=0.5,label=colname, color=color)
+        xcenters = starts + widths / 2
 
-	for i, (colname, color) in enumerate(zip(category_names, category_colors)):
-		widths = data[:, i]
-		starts = data_cum[:, i] - widths
-		ax.barh(labels, widths, left=starts, height=0.5,label=colname, color=color)
-		xcenters = starts + widths / 2
+        r, g, b, _ = color
+        text_color = 'white'
+        for y, (x, c) in enumerate(zip(xcenters, widths)):
+            ax.text(x, y, category_names[i], ha='center', va='center',
+                color=text_color, fontsize=20, fontweight='bold', fontname='Gill Sans MT')
 
-		r, g, b, _ = color
-		text_color = 'white'
-		for y, (x, c) in enumerate(zip(xcenters, widths)):
-			ax.text(x, y, category_names[i], ha='center', va='center',
-				color=text_color, fontsize=20, fontweight='bold', fontname='Gill Sans MT')
-
-	ax.axis('off')
-	plt.show()
+    ax.axis('off')
+    plt.show()
 
 def plot_worldmap(data_here):
+    '''
+    Plot of the 25 highest and 25 lowest countries in
+    terms of protest occurrences
+    '''
+    assert isinstance(data_here, pd.DataFrame), 'expected loaded dataframe'
+    data = data_here.copy()
+    # copy necessitated because non-existent countries are changed
+    data['country'] = data['country'].replace(['United Arab Emirate'], 'United Arab Emirates')
+    data['country'] = data['country'].replace(['USSR'], 'Russia')
+    data['country'] = data['country'].replace(['Germany West','Germany East'], 'Germany')
+    data['country'] = data['country'].replace(['Yugoslavia'], 'Croatia')
+    data['country'] = data['country'].replace(['Czechoslovakia'], 'Slovakia')
+    data['country'] = data['country'].replace(['Bosnia'], 'Bosnia and Herzegovina')
+    data['country'] = data['country'].replace(['Serbia and Montenegro', 'Kosovo'], 'Serbia')
+    data['country'] = data['country'].replace(['Congo Kinshasa', 'Congo Brazzaville'], 'Congo')
+    data['country'] = data['country'].replace(['South Sudan', 'North Sudan'], 'Sudan')
 
-	data = data_here.copy()
+    processed_data = data[['country','protest']].groupby('country').sum().sort_values('protest')
 
-	data['country'] = data['country'].replace(['United Arab Emirate'], 'United Arab Emirates')
-	data['country'] = data['country'].replace(['USSR'], 'Russia')
-	data['country'] = data['country'].replace(['Germany West','Germany East'], 'Germany')
-	data['country'] = data['country'].replace(['Yugoslavia'], 'Croatia')
-	data['country'] = data['country'].replace(['Czechoslovakia'], 'Slovakia')
-	data['country'] = data['country'].replace(['Bosnia'], 'Bosnia and Herzegovina')
-	data['country'] = data['country'].replace(['Serbia and Montenegro', 'Kosovo'], 'Serbia')
-	data['country'] = data['country'].replace(['Congo Kinshasa', 'Congo Brazzaville'], 'Congo')
-	data['country'] = data['country'].replace(['South Sudan', 'North Sudan'], 'Sudan')
+    reverse_country_map  = {v:k for k,v in COUNTRIES.items()}
 
-	processed_data = data[['country','protest']].groupby('country').sum().sort_values('protest')
+    most_protests = []
+    for x in processed_data[-25:].iterrows():
+        try:
+            most_protests.append(reverse_country_map[x[0]])
+        except:
+            pass
 
-	reverse_country_map  = {v:k for k,v in COUNTRIES.items()}
+    least_protests = []
+    for x in processed_data[:25].iterrows():
+        try:
+            least_protests.append(reverse_country_map[x[0]])
+        except:
+            pass
 
-	most_protests = []
-	for x in processed_data[-25:].iterrows():
-		try:
-			most_protests.append(reverse_country_map[x[0]])
-		except:
-			pass
-
-	least_protests = []
-	for x in processed_data[:25].iterrows():
-		try:
-			least_protests.append(reverse_country_map[x[0]])
-		except:
-			pass
-
-	worldmap_chart = pygal.maps.world.World()
-	worldmap_chart.title = 'Outliers of the World'
-	worldmap_chart.add('Most Protests', most_protests)
-	worldmap_chart.add('Least Protests', least_protests)
-	worldmap_chart.render_in_browser()
+    worldmap_chart = pygal.maps.world.World()
+    worldmap_chart.title = 'Outliers of the World'
+    worldmap_chart.add('Most Protests', most_protests)
+    worldmap_chart.add('Least Protests', least_protests)
+    worldmap_chart.render_in_browser()
