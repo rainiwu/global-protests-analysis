@@ -213,7 +213,7 @@ def duration_and_violence(main_data):
     '''
     Three pie charts related to violence and duration
     '''
-    assert isinstance(data, pd.DataFrame), 'expected loaded dataframe'
+    assert isinstance(main_data, pd.DataFrame), 'expected loaded dataframe'
     # process the input file
     MM = main_data
     violence = MM.sort_values(['country', 'year'])
